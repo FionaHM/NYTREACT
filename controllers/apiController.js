@@ -1,9 +1,7 @@
 var exprhbs = require('express-handlebars'); 
 var Article = require('../models/article.js');
 var APIKey = require('../config/APIKEY.js');
-var request = require('request');
-var React = require('react');
-var ReactDOM = require('react-dom');
+var request = require('request'); 
 var methodOverride = require("method-override");
 
 // I pass the app in as a parameter - this means i dont need to require express above
@@ -33,18 +31,10 @@ function router(app){
 		}, function(err, response, body) {
 		body = JSON.parse(body);  // put string in json
 		console.log(body.response);  // use json 
-
 		// format the data
 
-		// create a component
-		var Main = react.createClass
 
-		// now to render the results to the index.html somehow!
-			// ReactDOM.render(
-			// message, 
-			// document.getElementById('app')
-			// );
-
+// res.render('index', {})
 		})
 
 	})
@@ -69,7 +59,7 @@ function router(app){
 
 	// put this at the end after all other routes
 	app.get('/', function(req, res){
-		res.render('index', {})
+
 	})
 	
 
