@@ -9,11 +9,13 @@ var Schema = mongoose.Schema;
 // create a Schema
 var articleSchema = new Schema({
     // _id: Number,
-    title: {type : String, required : true, unique : true},
-    date: {type : String, required : true, unique : true}, // might change to date later
-    url: {type : String, required : true, unique : true},
-    created_at: Date,
-    updated_at: Date
+    id: {type : String, required : true, unique : true},
+    headline: {type : String, required : true, unique : true},
+    pubdate: {type : String, required : true, unique : true}, 
+    weburl: {type : String, required : true, unique : true},
+    snippet: {type : String, required : false, unique : true},
+    created_at: {type : Date, required : true, default: Date.now},
+    updated_at: {type : Date, required : true, default: Date.now},
 });
 
 // create a model using this Schema

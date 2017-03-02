@@ -4,11 +4,11 @@ var React = require("react");
 var Search = React.createClass({
   getInitialState: function() {
       return {
-          url:"",
+          weburl:"",
           headline: "",
           source: "",
           pubdate: "",
-          abstract: ""
+          snippet: ""
   
       }
   },

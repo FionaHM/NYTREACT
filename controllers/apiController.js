@@ -32,14 +32,8 @@ function router(app){
 				'sort': "newest"
 			},
 		}, function(err, response, body) {
-		body = JSON.parse(body);  // put string in json
-		// // if (body.response != undefined){
-		// 	// test outout
-		// 	console.log(body.response.docs[0].headline.main);
-		// }
-  // use json 
-		// format the data
-// React.renderToString(routerContext(props));
+			// only send top 10 results -- need to do something here
+			body = JSON.parse(body);  // put string in json
 			res.json(body.response);
 		})
 
@@ -52,7 +46,13 @@ function router(app){
 	
 	// saves new articles
 	app.post('/api/saved', function(req, res){
-		// res.render('index', {})
+ 
+		var newArticle = new Article(req.body);
+		//save coment to db
+		newArticle.save({}, function(err, article) {
+			console.log(article);
+			res.json();
+		})
 
 	})
 
