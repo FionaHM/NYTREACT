@@ -7,25 +7,22 @@ var Results = React.createClass({
    
         }
     },
-    render: function () {
-        return (<div className="panel panel-default">
-                    <div className="panel-heading text-center"><h4>Results</h4></div>
-                    <div className="panel-body">
-                        <div className="well">
-                            <div className="row">
-                                <div className="col-sm-8">
-                                    <p className="results">{this.props.headline}</p>
-                                </div>
-                                <div className="col-sm-4">
-                                    <form action="/api/saved" method="POST">
-                                        <button>Saved</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>);
-    }
+    render: function() {
+            var resultComponents = this.props.results.map(function(result) {
+                return <div className="row results" key={result._id}>
+                <div className="col-md-4"><a href={result.web_url}>{result.headline.main}</a></div>
+                <div className="col-md-4">{result.snippet}</div>
+                <div className="col-md-2">{result.pub_date}</div>
+                <div className="col-md-2">
+                    <form action="/api/saved" method="POST">
+                            <button>Saved</button>
+                    </form>
+                </div>
+                </div>
+            });
+            return <div>{resultComponents}</div>;
+        }
 });
+
 
 module.exports = Results;

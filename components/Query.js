@@ -11,21 +11,17 @@ var Query = React.createClass({
             topic: "",
             startyear: 0,
             endyear: 0,
-            weburl:"",
-            headline: "",
-            source: "",
-            pubdate: "",
-            abstract: "",
-            snippet: ""
+            results: []
         }
     },
     handleData: function(result){
         console.log(result.docs[0].headline.main);
-        this.setState({ headline : result.docs['0'].headline.main,
-        snippet : result.docs['0'].snippet,
-        weburl : result.docs['0'].web_url,
-        source: result.docs['0'].source,
-        pubdate : result.docs['0'].pub_date});
+        // this.setState({ headline : result.docs['0'].headline.main,
+        // snippet : result.docs['0'].snippet,
+        // weburl : result.docs['0'].web_url,
+        // source: result.docs['0'].source,
+        // pubdate : result.docs['0'].pub_date});
+        this.setState({results: result.docs})
     },
    handleClick: function() {
         var topic = $('#topic').val();
@@ -67,7 +63,27 @@ var Query = React.createClass({
                         </div>
                         <button onClick={this.handleClick} type="submit" className="btn btn-default">Search</button>
                     </div>
-                    <div><Results headline={this.state.headline}  weburl={this.state.weburl} snippet={this.state.snippet} pubdate={this.state.pubdate} source={this.state.source}/></div>
+
+                    <div className="panel panel-default">
+                    <div className="panel-heading text-center"><h4>Results</h4></div>
+                    <div className="panel-body">
+                        <div className="well">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="text-center col-md-4">Article</div>
+                                    <div className="text-center col-md-4">Extract</div>
+                                    <div className="text-center col-md-2">Published Date</div>
+                                    <div className="text-center col-md-2">Save</div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="row results"><Results results={this.state.results}/></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>);
     }
 
