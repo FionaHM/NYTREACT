@@ -14,6 +14,7 @@ var Search = React.createClass({
         }
     },
     handleData: function(result){
+        // sets state of results
         this.setState({results: result.docs})
     },
     handleClick: function() {
@@ -23,6 +24,7 @@ var Search = React.createClass({
         var myHeaders = new Headers();
         var myInit = { method: 'GET' };
         // use ESX6 Syntax to maintain 'this' context
+        // gets article data from express server
         fetch("/search/"+topic+"/"+startdate+"/"+enddate, myInit)   
         .then((response) => {
             return response.json()
@@ -56,10 +58,12 @@ var Search = React.createClass({
                         <div className="well">
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <div className="text-center col-md-4">Article</div>
-                                    <div className="text-center col-md-4">Extract</div>
-                                    <div className="text-center col-md-2">Published Date</div>
-                                    <div className="text-center col-md-2">Save</div>
+                                    <div className="row">
+                                        <div className="text-center col-md-4">Article</div>
+                                        <div className="text-center col-md-4">Extract</div>
+                                        <div className="text-center col-md-2">Published Date</div>
+                                        <div className="text-center col-md-2">Save</div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="row">

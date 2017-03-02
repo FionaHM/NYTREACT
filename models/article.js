@@ -11,7 +11,7 @@ var articleSchema = new Schema({
     // _id: Number,
     id: {type : String, required : true, unique : true},
     headline: {type : String, required : true, unique : true},
-    pubdate: {type : String, required : true, unique : true}, 
+    pubdate: {type : String, required : true, unique : false}, 
     weburl: {type : String, required : true, unique : true},
     snippet: {type : String, required : false, unique : true},
     created_at: {type : Date, required : true, default: Date.now},

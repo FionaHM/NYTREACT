@@ -18,6 +18,7 @@ var Main = React.createClass({
         <div className="jumbotron">
             <div className="page-header">
             <h2 className="text-center">New York Times Article Scrubber</h2>
+            <p className="text-center">Search for and save articles of interest!"</p>
             <hr/>
             </div>
         </div>

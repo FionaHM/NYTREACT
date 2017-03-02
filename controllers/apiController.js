@@ -42,24 +42,42 @@ function router(app){
 	// gets all saved articles
 	app.get('/api/saved', function(req, res){
 		// res.render('index', {})
+		console.log("in here");
+		Article.find({}).exec(function(err, articles) {
+			
+			if (err) {
+				console.log(err);
+				res.end();
+			} else {
+				console.log("saved articles", articles);
+				res.json(articles);
+			}	
+		});
 	})
 	
 	// saves new articles
 	app.post('/api/saved', function(req, res){
- 
 		var newArticle = new Article(req.body);
-		//save coment to db
+		//save  to db
 		newArticle.save({}, function(err, article) {
-			console.log(article);
-			res.json();
+			if (err) {
+				console.log(err);
+				res.end();
+			} else {
+				res.json();
+			}
 		})
 
 	})
 
-		
-	// removes articles articles
-	app.delete('/api/saved', function(req, res){
-		// res.render('index', {})
+	// removes saved articles from dbs
+	app.delete('/api/saved/:id', function(req, res){
+		Article.remove({id: req.params.id},function(err, article) {
+			if (err) {
+				console.log(err);
+			} 
+			res.end();
+		})
 
 	})
 
