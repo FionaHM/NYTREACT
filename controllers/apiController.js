@@ -2,7 +2,9 @@ var exprhbs = require('express-handlebars');
 var Article = require('../models/article.js');
 var APIKey = require('../config/APIKEY.js');
 var request = require('request'); 
+var path = require("path");
 var methodOverride = require("method-override");
+var React = require('react');
 
 // I pass the app in as a parameter - this means i dont need to require express above
 function router(app){
@@ -12,29 +14,33 @@ function router(app){
 	app.set('view engine', 'handlebars');
 
 	// does nyt search and displays results
-	app.get('/search', function(req, res){
+	app.get('/search/:topic/:startdate/:enddate', function(req, res){
 		// do some validation
 		var beginDate = req.params.startdate;
 		var endDate = req.params.enddate;
 		var topic = req.params.topic;
-
+		// using dummy data for nows
+		console.log(req.params );
 		var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + APIKey + "&q=";
 		request.get({
 			url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
 			qs: {
 				'api-key': APIKey,
 				'q': topic,
-				'begin_date': beginDate,
+				'begin_date':beginDate,
 				'end_date': endDate,
 				'sort': "newest"
 			},
 		}, function(err, response, body) {
 		body = JSON.parse(body);  // put string in json
-		console.log(body.response);  // use json 
+		// // if (body.response != undefined){
+		// 	// test outout
+		// 	console.log(body.response.docs[0].headline.main);
+		// }
+  // use json 
 		// format the data
-
-
-// res.render('index', {})
+// React.renderToString(routerContext(props));
+			res.json(body.response);
 		})
 
 	})
@@ -59,7 +65,7 @@ function router(app){
 
 	// put this at the end after all other routes
 	app.get('/', function(req, res){
-
+		 res.render('index');
 	})
 	
 
