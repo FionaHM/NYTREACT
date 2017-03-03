@@ -1,7 +1,7 @@
 var React = require("react");
 // var ReactDOM = require("react-dom");
 var Search = require("./Search.js");
-var Saved = require("./Saved.js");
+
 
 
 var Main = React.createClass({
@@ -19,7 +19,7 @@ var Main = React.createClass({
         <div className="jumbotron">
             <div className="page-header">
             <h2 className="text-center">New York Times Article Scrubber</h2>
-            <p className="text-center">Search for and save articles of interest!"</p>
+            <p className="text-center">Search for and save articles of interest!</p>
             <hr/>
             </div>
         </div>

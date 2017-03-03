@@ -42,7 +42,6 @@ function router(app){
 	// gets all saved articles
 	app.get('/api/saved', function(req, res){
 		// res.render('index', {})
-		console.log("in here");
 		Article.find({}).exec(function(err, articles) {
 			
 			if (err) {

@@ -5,18 +5,19 @@ var helpers = {
 
     runQuery: function(queryURL) {
 
-            // fetch(searchQuery, myInit)   
-            // .then((response) => {
-            //     return response.json()
-            // }).then((data) => {
-            //     this.handleData(data);
-            // })
         return axios.get(queryURL).then(function(response) {
 
         return response.data;
         })
     },
 
+    querySaved: function(count) {
+
+        return axios.get('/api/saved').then(function(response) {
+
+            return response.data;
+        })
+    },
     postArticle: function(articleObj) {
         // axios is not posting req.body content so will use jquery here for now cos it works- must be something to do with middleware but will revisit if times
     //    return axios({ method: 'post',

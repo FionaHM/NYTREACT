@@ -3,11 +3,10 @@ var helper = require("../app/utils/helper.js");
 
 
 var Results = React.createClass({
-    getInitialState: function() {
-      return {
-          savedCount: 0
-      }
-    },
+    
+    // componentDidMount: function(){
+    //      this.setState({ savedCount: this.props.savedcount})
+    // },
     saveArticleClick: function(result){;
         var articleObj = {
             id: result._id,
@@ -19,11 +18,12 @@ var Results = React.createClass({
         
         var saved= helper.postArticle(articleObj) 
 
-        this.setState({savedCount: this.state.savedCount + 1})
-     
-
+        // // this.setState({savedcount: this.state.savedcount + 1});
+        // // update parent state by one
+        // this.props.updateSavedCount();
     },
     render: function() {
+        
         var component = this;  // setting variable to ensure 'this' context is for the component 
         var resultComponents = this.props.results.map(function(result) {
 
@@ -36,8 +36,28 @@ var Results = React.createClass({
                 </div>
             </div>
         });
-        return (<div><div>{resultComponents}</div></div>);
-    }
+        return (<div className="panel panel-default">
+                    <div className="panel-heading text-center"><h4>Results</h4></div>
+                    <div className="panel-body">
+                        <div className="well">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="row">
+                                        <div className="text-center col-md-4">Article</div>
+                                        <div className="text-center col-md-4">Extract</div>
+                                        <div className="text-center col-md-2">Published Date</div>
+                                        <div className="text-center col-md-2">Save</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="row results"><div>{resultComponents}</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>) }
 });
 
 module.exports = Results;
