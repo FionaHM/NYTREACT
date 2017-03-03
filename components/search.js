@@ -63,16 +63,16 @@ var Search = React.createClass({
         })    
     },
     // requery when parent component updates
-    componentDidUpdate: function(){ 
-        // creates infinite loop unless there is a break clause 
-        // console.log("running did update")
-        helper.querySaved().then((response) => {
-            // console.log(this.state.savedcount, response.length)
-            this.handleSavedData(response)
+    // // componentDidUpdate: function(){ 
+    //     // creates infinite loop unless there is a break clause 
+    //     // console.log("running did update")
+    //     helper.querySaved().then((response) => {
+    //         // console.log(this.state.savedcount, response.length)
+    //         this.handleSavedData(response)
        
-        })
+    //     })
 
-    },
+    // },
     render: function () {
         console.log(this.state.saved);
         return (<div>
@@ -94,8 +94,8 @@ var Search = React.createClass({
                         <button onClick={this.handleClick} type="submit" className="btn btn-default">Search</button>
                         </div>
                     </div>
-                    <div className="row results"><Results results={this.state.results}/></div>
-                    <div className="row results"><Saved saved={this.state.saved}/></div>
+                    <div className="row results"><Results results={this.state.results} handleSavedData={this.handleSavedData}/></div>
+                    <div className="row results"><Saved saved={this.state.saved} handleSavedData={this.handleSavedData}/></div>
                 </div>);
     }
 });

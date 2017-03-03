@@ -12,6 +12,12 @@ var Search = React.createClass({
                 // Do something with the result
             }
         });
+
+        helper.querySaved().then((response) => {
+            // update state of parent
+            this.props.handleSavedData(response);
+        })
+
     },
     render: function() {
 

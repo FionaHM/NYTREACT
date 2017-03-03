@@ -16,11 +16,14 @@ var Results = React.createClass({
             pubdate: result.pub_date
         };
         
-        var saved= helper.postArticle(articleObj) 
+        // save the article
+        helper.postArticle(articleObj);
+        // refresh the list
+        helper.querySaved().then((response) => {
+            // update state of parent
+            this.props.handleSavedData(response);
+        })
 
-        // // this.setState({savedcount: this.state.savedcount + 1});
-        // // update parent state by one
-        // this.props.updateSavedCount();
     },
     render: function() {
         
