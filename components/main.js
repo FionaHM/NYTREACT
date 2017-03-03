@@ -3,6 +3,7 @@ var React = require("react");
 var Search = require("./Search.js");
 var Saved = require("./Saved.js");
 
+
 var Main = React.createClass({
   getInitialState: function() {
       return {
@@ -24,7 +25,6 @@ var Main = React.createClass({
         </div>
         <div className="well">
             <div><Search/></div>
-            <div><Saved /></div>
         </div>
     </div>);
   }

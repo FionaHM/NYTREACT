@@ -2,52 +2,69 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var APIKey = require('../config/APIKEY.js');
 var Results = require("./Results.js");
+var helper = require("../app/utils/helper.js");
+var Saved = require("./Saved.js");
 
 var Search = React.createClass({
    
     getInitialState: function() {
         return {
             topic: "",
-            startyear: 0,
-            endyear: 0,
+            startdate: "",
+            enddate: "",
             results: []
         }
     },
     handleData: function(result){
-        // sets state of results
-        this.setState({results: result.docs})
+        // sets state of results and resets input fields
+        console.log(result)
+        this.setState({
+            topic: "",
+            startdate: "",
+            enddate: "",
+            results: result
+        });
     },
+    updateTopic: function(e) {
+        this.setState({
+        topic: e.target.value
+        })
+    },
+    updateStartDate: function(e) {
+        this.setState({
+        startdate: e.target.value
+        })
+    },
+    updateEndDate: function(e) {
+        this.setState({
+        enddate: e.target.value
+        })
+    },
+    // This function will respond to the user input
     handleClick: function() {
-        var topic = $('#topic').val();
-        var startdate = $('#start-date').val();
-        var enddate = $('#end-date').val();
-        var myHeaders = new Headers();
-        var myInit = { method: 'GET' };
-        // use ESX6 Syntax to maintain 'this' context
         // gets article data from express server
-        fetch("/search/"+topic+"/"+startdate+"/"+enddate, myInit)   
-        .then((response) => {
-            return response.json()
-        }).then((data) => {
-            this.handleData(data);
+        var searchQuery = "/search/"+this.state.topic+"/"+this.state.startdate+"/"+this.state.enddate;
+        // use ESX6 Syntax to maintain 'this' context
+        helper.runQuery(searchQuery).then((response) => {
+            this.handleData(response.docs)
         })
     },
     render: function () {
         return (<div>
-                <div className="panel panel-default">
+                    <div className="panel panel-default">
                     <div className="panel-heading text-center"><h4>Search</h4></div>
                     <div className="panel-body">
                         <div className="form-group">
                             <label htmlFor="topic">Topic</label>
-                            <input type="text" className="form-control" maxLength="70" id="topic" name="topic" required />
+                            <input type="text"  className="form-control" onChange={this.updateTopic} maxLength="70" id="topic" name="topic" required />
                         </div>
                         <div className="form-group">
                             <label htmlFor="start-date">Start Date (YYYYMMDD)</label>
-                            <input type="number" name="quantity"  min="19000101"  max="20170228" className="form-control" id="start-date" name="startyear" />
+                            <input type="text" value={this.state.startdate}  onChange={this.updateStartDate} maxLength="8" className="form-control" id="startdate" name="startyear" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="end-date">End Year (YYYYMMDD)</label>
-                            <input type="number" name="quantity" min="19000101" max="20170228"  className="form-control" id="end-date" name="endyear" />
+                            <input type="text" value={this.state.enddate} onChange={this.updateEndDate} name="quantity" maxLength="8" className="form-control" id="enddate" name="endyear" />
                         </div>
                         <button onClick={this.handleClick} type="submit" className="btn btn-default">Search</button>
                     </div>
@@ -74,10 +91,9 @@ var Search = React.createClass({
                         </div>
                     </div>
                 </div>
+                <div><Saved /></div>
             </div>);
     }
-
-
 });
 
 module.exports = Search;

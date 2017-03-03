@@ -1,24 +1,30 @@
 var React = require("react");
+var helper = require("../app/utils/helper.js");
+
 
 var Results = React.createClass({
-
-    saveArticleClick: function(result){
-
-        console.log("teset", result);
-        var articleData = {
+    getInitialState: function() {
+      return {
+          savedCount: 0
+      }
+    },
+    saveArticleClick: function(result){;
+        var articleObj = {
             id: result._id,
             weburl: result.web_url,
             headline: result.headline.main,
             snippet: result.snippet,
             pubdate: result.pub_date
-        }
-        $.post('/api/saved',articleData, function(data, success){
-            console.log(success);
-        })
+        };
+        
+        var saved= helper.postArticle(articleObj) 
+
+        this.setState({savedCount: this.state.savedCount + 1})
+     
 
     },
     render: function() {
-        var component = this;  // setting variable to capture 'this' for use below
+        var component = this;  // setting variable to ensure 'this' context is for the component 
         var resultComponents = this.props.results.map(function(result) {
 
             return <div className="row results" key={result._id}>
@@ -30,7 +36,7 @@ var Results = React.createClass({
                 </div>
             </div>
         });
-        return <div>{resultComponents}</div>;
+        return (<div><div>{resultComponents}</div></div>);
     }
 });
 

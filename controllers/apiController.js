@@ -2,8 +2,8 @@ var exprhbs = require('express-handlebars');
 var Article = require('../models/article.js');
 var APIKey = require('../config/APIKEY.js');
 var request = require('request'); 
-var path = require("path");
-var methodOverride = require("method-override");
+var path = require('path');
+var methodOverride = require('method-override');
 var React = require('react');
 
 // I pass the app in as a parameter - this means i dont need to require express above
@@ -57,6 +57,7 @@ function router(app){
 	
 	// saves new articles
 	app.post('/api/saved', function(req, res){
+		// console.log("req.body", req.body);
 		var newArticle = new Article(req.body);
 		//save  to db
 		newArticle.save({}, function(err, article) {
@@ -64,7 +65,8 @@ function router(app){
 				console.log(err);
 				res.end();
 			} else {
-				res.json();
+				// console.log(article);
+				res.json(article);
 			}
 		})
 

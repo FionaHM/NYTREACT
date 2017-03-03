@@ -5,9 +5,9 @@ var ReactDOM = require("react-dom");
 // var Main = require("../components/Main.js");
 var routes = require("../config/routes.js");
 
-if (typeof window !== 'undefined') {
-    window.React = React;
-}
+// if (typeof window !== 'undefined') {
+//     window.React = React;
+// }
 
 ReactDOM.render(routes, document.getElementById("app"));
 

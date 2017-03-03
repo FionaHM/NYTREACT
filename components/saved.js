@@ -4,7 +4,8 @@ var React = require("react");
 var Search = React.createClass({
     getInitialState: function() {
         return {
-            results: []
+            results: [],
+            savedCount: 0
         }
     },
     handleData: function(result){
