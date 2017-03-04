@@ -36,6 +36,7 @@ function router(app){
 			body = JSON.parse(body);  // put string in json
 			res.json(body.response);
 		})
+	
 
 	})
 
@@ -48,15 +49,13 @@ function router(app){
 				console.log(err);
 				res.end();
 			} else {
-				console.log("saved articles", articles);
 				res.json(articles);
 			}	
 		});
 	})
 	
 	// saves new articles
-	app.post('/api/saved', function(req, res){
-		// console.log("req.body", req.body);
+	app.post('/api/saved/article', function(req, res){
 		var newArticle = new Article(req.body);
 		//save  to db
 		newArticle.save({}, function(err, article) {
@@ -64,7 +63,6 @@ function router(app){
 				console.log(err);
 				res.end();
 			} else {
-				// console.log(article);
 				res.json(article);
 			}
 		})
@@ -82,8 +80,9 @@ function router(app){
 
 	})
 
+
 	// put this at the end after all other routes
-	app.get('/', function(req, res){
+	app.use(function(req, res){
 		 res.render('index');
 	})
 	

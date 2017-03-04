@@ -24,7 +24,7 @@ var Main = React.createClass({
             </div>
         </div>
         <div className="well">
-            <div><Search/></div>
+          {this.props.children}
         </div>
     </div>);
   }

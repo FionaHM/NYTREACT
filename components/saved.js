@@ -5,14 +5,8 @@ var helper = require("../app/utils/helper.js");
 var Search = React.createClass({
 
     removeArticleClick: function(result){
-        $.ajax({
-            url: '/api/saved/'+result.id,
-            type: 'DELETE',
-            success: function(result) {
-                // Do something with the result
-            }
-        });
-
+        helper.deleteArticle(result.id)
+        // update state of parent
         helper.querySaved().then((response) => {
             // update state of parent
             this.props.handleSavedData(response);
@@ -20,7 +14,6 @@ var Search = React.createClass({
 
     },
     render: function() {
-
         var component = this;  // setting variable to capture 'this' for use below
         if (this.props.saved){
             var resultComponents = this.props.saved.map(function(result) {
@@ -29,7 +22,7 @@ var Search = React.createClass({
                     <div className="col-md-4">{result.snippet}</div>
                     <div className="col-md-2 text-center">{result.created_at}</div>
                     <div className="col-md-2 text-center">
-                        <button onClick={() => component.removeArticleClick(result)} className="text-center">Delete</button>
+                        <button onClick={() => component.removeArticleClick(result)} className="btn btn-default text-center btn-primary">Delete</button>
                     </div>
                 </div>)
             });
@@ -39,11 +32,11 @@ var Search = React.createClass({
                         <div className="well">
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <div className="row">
-                                        <div className="text-center col-md-4">Article</div>
-                                        <div className="text-center col-md-4">Extract</div>
-                                        <div className="text-center col-md-2">Saved Date</div>
-                                        <div className="text-center col-md-2">Delete</div>
+                                    <div className="row results">
+                                        <div className="text-center col-md-4"><strong>Article</strong></div>
+                                        <div className="text-center col-md-4"><strong>Extract</strong></div>
+                                        <div className="text-center col-md-2"><strong>Saved Date</strong></div>
+                                        <div className="text-center col-md-2"></div>
                                     </div>
                                 </div>
                             </div>

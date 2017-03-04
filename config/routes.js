@@ -5,11 +5,18 @@ var Route = ReactRouter.Route;
 var hashHistory =  ReactRouter.hashHistory;
 var IndexRoute = require("react-router").IndexRoute;
 var Main = require("../components/Main");
+var Search = require("../components/Search");
+var Results = require("../components/Results");
+var Saved = require("../components/Saved");
+
 
 var routes = (
     <Router history={hashHistory}>
-        <Route path='/' component={Main} >
-    </Route>
+        <Route IndexRoute component={Main}>
+            <Route path='/' component={Search}/>
+            <Route path='/' component={Results} />
+            <Route path='/' component={Saved}/>
+        </Route>  
     </Router>
 )
 

@@ -14,9 +14,9 @@ var helpers = {
     querySaved: function(count) {
 
         return axios.get('/api/saved').then(function(response) {
-
             return response.data;
         })
+        
     },
     postArticle: function(articleObj) {
         // axios is not posting req.body content so will use jquery here for now cos it works- must be something to do with middleware but will revisit if times
@@ -32,15 +32,26 @@ var helpers = {
     //     .catch(function (error) {
     //         console.log(error);
     //     })        
-        $.post('/api/saved',articleObj, function(data, success){
+        $.post('/api/saved/article',articleObj, function(data, success){
                 if (success) {
                     console.log(success);
                     return success
                 };
         })
     
-    }
-};
+    },
 
+   deleteArticle: function(id) {
+        $.ajax({
+            url: '/api/saved/'+id,
+            type: 'DELETE',
+            success: function(result) {
+                // Do something with the result
+                return result;
+            }
+        });
+    
+    }
+ };
 // We export the helpers function (which contains getGithubInfo)
 module.exports = helpers;

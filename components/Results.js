@@ -35,21 +35,22 @@ var Results = React.createClass({
                 <div className="col-md-4">{result.snippet}</div>
                 <div className="col-md-2 text-center">{result.pub_date}</div>
                 <div className="col-md-2 text-center">
-                    <button onClick={() => component.saveArticleClick(result)} className="text-center">Saved</button>
+                    <button onClick={() => component.saveArticleClick(result)} className="btn btn-default stext-center btn-primary">Save</button>
                 </div>
             </div>
         });
-        return (<div className="panel panel-default">
+        return (<div>
+                    <div className="panel panel-default">
                     <div className="panel-heading text-center"><h4>Results</h4></div>
                     <div className="panel-body">
                         <div className="well">
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <div className="row">
-                                        <div className="text-center col-md-4">Article</div>
-                                        <div className="text-center col-md-4">Extract</div>
-                                        <div className="text-center col-md-2">Published Date</div>
-                                        <div className="text-center col-md-2">Save</div>
+                                    <div className="row results">
+                                        <div className="text-center col-md-4"><strong>Article</strong></div>
+                                        <div className="text-center col-md-4"><strong>Extract</strong></div>
+                                        <div className="text-center col-md-2"><strong>Published Date</strong></div>
+                                        <div className="text-center col-md-2"></div>
                                     </div>
                                 </div>
                             </div>
@@ -60,6 +61,7 @@ var Results = React.createClass({
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>) }
 });
 

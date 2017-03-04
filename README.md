@@ -1,2 +1,2 @@
 # NYTREACT
-react app for saving and display NYT artices
+MongoDB, Express Node and React application for saving and display artices from the NYT API.
