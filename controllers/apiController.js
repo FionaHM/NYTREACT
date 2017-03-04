@@ -1,6 +1,6 @@
 var exprhbs = require('express-handlebars'); 
 var Article = require('../models/article.js');
-var APIKey = require('../config/APIKEY.js');
+var APIKey = process.env.APIKey || require('../config/APIKEY.js');
 var request = require('request'); 
 var path = require('path');
 var methodOverride = require('method-override');
